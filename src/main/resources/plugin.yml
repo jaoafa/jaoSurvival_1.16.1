@@ -1,0 +1,6 @@
+name: ${project.artifactId}
+main: com.jaoafa.jaoSurvival.Main
+version: 2020.1
+description: jao Survival 2020
+database: true
+author: mine_book000
