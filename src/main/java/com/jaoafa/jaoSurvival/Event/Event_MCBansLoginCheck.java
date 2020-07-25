@@ -50,6 +50,9 @@ public class Event_MCBansLoginCheck implements Listener {
 				}
 				if (reputation != 10) {
 					for (Player player : Bukkit.getOnlinePlayers()) {
+						if (!player.isOp()) {
+							continue;
+						}
 						player.sendMessage(ChatColor.RED + "[MCBansChecker] " + ChatColor.GREEN + name + " reputation: "
 								+ reputation);
 					}
