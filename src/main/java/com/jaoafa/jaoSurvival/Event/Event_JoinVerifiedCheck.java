@@ -40,9 +40,9 @@ public class Event_JoinVerifiedCheck implements Listener {
 		}
 		String permission = data.getString("permission");
 
-		Date start = new Date(1596240000 * 1000); // 2020/08/01 00:00:00 JST
+		Date start = new Date(1596207600L * 1000L); // 2020/08/01 00:00:00 JST
 		Date now = new Date();
-		Date end = new Date(1598918399 * 1000); // 2020/08/31 23:59:59 JST
+		Date end = new Date(1598885999L * 1000L); // 2020/08/31 23:59:59 JST
 		if (now.before(start) &&
 				!permission.equalsIgnoreCase("Admin") &&
 				!permission.equalsIgnoreCase("Moderator")) {
