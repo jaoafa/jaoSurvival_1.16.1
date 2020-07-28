@@ -12,6 +12,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.jaoafa.jaoSurvival.Event.Event_CommandNotify;
 import com.jaoafa.jaoSurvival.Event.Event_JoinVerifiedCheck;
 import com.jaoafa.jaoSurvival.Event.Event_LoginVoteCheck;
 import com.jaoafa.jaoSurvival.Event.Event_MCBansLoginCheck;
@@ -92,6 +93,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Event_JoinVerifiedCheck(), this);
 		getServer().getPluginManager().registerEvents(new Event_LoginVoteCheck(), this);
 		getServer().getPluginManager().registerEvents(new Event_MCBansLoginCheck(), this);
+		getServer().getPluginManager().registerEvents(new Event_CommandNotify(), this);
 		new Task_CheckVoteCount().runTaskTimer(this, 0L, 12000L);
 	}
 
