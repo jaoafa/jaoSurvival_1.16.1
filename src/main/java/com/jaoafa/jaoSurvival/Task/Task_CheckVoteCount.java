@@ -52,6 +52,9 @@ public class Task_CheckVoteCount extends BukkitRunnable {
 			return;
 		}
 		Timestamp created_at = Main.getCheckPrevCreatedAt(player);
+		if(created_at == null){
+			return;
+		}
 		if (Main.equalsDate(created_at, Calendar.getInstance())) {
 			Main.updateCheckPrevCount(player, mcjpCount, monoCount);
 			return;
@@ -71,9 +74,6 @@ public class Task_CheckVoteCount extends BukkitRunnable {
 					.println("[Task_CheckVoteCount] VoteCount Changed (Mono) : " + monoPrevCount + " -> " + monoCount);
 			Bukkit.broadcastMessage("[Vote] " + ChatColor.GREEN + player.getName() + "さんがmonocraft.netで投票しました。");
 			plusCount += 1;
-		}
-		if (plusCount == 0) {
-			return;
 		}
 		PlayerInventory inv = player.getInventory();
 		ItemStack item = new ItemStack(Material.MONSTER_EGG, plusCount);

@@ -90,7 +90,6 @@ public class Event_MCBansLoginCheck implements Listener {
 			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return;
 		}
 	}
 }

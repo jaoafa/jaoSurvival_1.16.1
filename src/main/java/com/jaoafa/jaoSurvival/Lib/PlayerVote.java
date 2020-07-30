@@ -10,9 +10,9 @@ import org.bukkit.entity.Player;
 import com.jaoafa.jaoSurvival.Main;
 
 public class PlayerVote {
-	Player player;
-	int mcjpVoteCount = 0;
-	int monoVoteCount = 0;
+	final Player player;
+	int mcjpVoteCount;
+	int monoVoteCount;
 
 	public PlayerVote(Player player) {
 		this.player = player;

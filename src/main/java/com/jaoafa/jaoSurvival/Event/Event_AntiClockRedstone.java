@@ -15,8 +15,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockRedstoneEvent;
 
 public class Event_AntiClockRedstone implements Listener {
-	Map<Location, Long> redstoneclocks = new HashMap<>();
-	Map<Location, Integer> rcs_count = new HashMap<>();
+	final Map<Location, Long> redstoneclocks = new HashMap<>();
+	final Map<Location, Integer> rcs_count = new HashMap<>();
 
 	// ピストンは必要に応じて対応。
 
@@ -46,8 +46,7 @@ public class Event_AntiClockRedstone implements Listener {
 		long sa = milliSec - milliSec_old;
 		if (sa > 1000) {
 			// 1s (20tick, 1000ms) 以上
-			if (rcs_count.containsKey(block.getLocation()))
-				rcs_count.remove(block.getLocation());
+			rcs_count.remove(block.getLocation());
 			redstoneclocks.remove(block.getLocation());
 			return;
 		}

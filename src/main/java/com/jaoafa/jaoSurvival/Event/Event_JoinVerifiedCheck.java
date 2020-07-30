@@ -22,9 +22,14 @@ public class Event_JoinVerifiedCheck implements Listener {
 	public void OnLogin(AsyncPlayerPreLoginEvent event) {
 		UUID uuid = event.getUniqueId();
 		JSONObject json = getHttpJson("https://api.jaoafa.com/users/" + uuid.toString());
+		if(json == null){
+			event.disallow(Result.KICK_OTHER, ChatColor.GREEN + "[2020SurvivalEvent]\n\n"
+					+ ChatColor.RESET + "権限の取得に失敗しました。時間をおいてからもう一回お試しください。(0)");
+			return;
+		}
 		if (!json.has("status") || !json.getBoolean("status")) {
 			event.disallow(Result.KICK_OTHER, ChatColor.GREEN + "[2020SurvivalEvent]\n\n"
-					+ ChatColor.RESET + "権限の取得に失敗しました。時間をおいてからもう一回お試しください。");
+					+ ChatColor.RESET + "権限の取得に失敗しました。時間をおいてからもう一回お試しください。(1)");
 			return;
 		}
 		if (!json.has("data")) {
@@ -66,7 +71,6 @@ public class Event_JoinVerifiedCheck implements Listener {
 				!permission.equalsIgnoreCase("Verified")) {
 			event.disallow(Result.KICK_OTHER, ChatColor.GREEN + "[2020SurvivalEvent]\n"
 					+ ChatColor.RESET + "あなたにはイベントサーバに参加するための権限がありません。(" + permission + ")");
-			return;
 		}
 	}
 
@@ -81,6 +85,9 @@ public class Event_JoinVerifiedCheck implements Listener {
 				if (response.body() != null) {
 					System.out.println("[AntiAlts3] Response: " + response.body().string());
 				}
+				return null;
+			}
+			if(response.body() == null){
 				return null;
 			}
 			JSONObject obj = new JSONObject(response.body().string());
