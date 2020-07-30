@@ -8,14 +8,11 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
+import com.jaoafa.jaoSurvival.Event.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.jaoafa.jaoSurvival.Event.Event_CommandNotify;
-import com.jaoafa.jaoSurvival.Event.Event_JoinVerifiedCheck;
-import com.jaoafa.jaoSurvival.Event.Event_LoginVoteCheck;
-import com.jaoafa.jaoSurvival.Event.Event_MCBansLoginCheck;
 import com.jaoafa.jaoSurvival.Lib.MySQLDBManager;
 import com.jaoafa.jaoSurvival.Task.Task_CheckVoteCount;
 
@@ -94,6 +91,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Event_LoginVoteCheck(), this);
 		getServer().getPluginManager().registerEvents(new Event_MCBansLoginCheck(), this);
 		getServer().getPluginManager().registerEvents(new Event_CommandNotify(), this);
+		getServer().getPluginManager().registerEvents(new Event_Plant(), this);
 		new Task_CheckVoteCount().runTaskTimer(this, 0L, 12000L);
 	}
 
