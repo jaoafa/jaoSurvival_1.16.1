@@ -3,21 +3,22 @@ package com.jaoafa.jaoSurvival.Lib;
 import org.bukkit.Material;
 
 public enum Crop {
-	SEEDS(Material.SEEDS, Material.CROPS, Material.SOIL),
-	POTATO(Material.POTATO_ITEM, Material.POTATO, Material.SOIL),
-	CARROT(Material.CARROT_ITEM, Material.CARROT, Material.SOIL),
-	MELON(Material.MELON_SEEDS, Material.MELON_STEM, Material.SOIL),
-	PUMPKIN(Material.PUMPKIN_SEEDS, Material.PUMPKIN_STEM, Material.SOIL),
-	NETHER_WART(Material.NETHER_STALK, Material.NETHER_WARTS, Material.SOUL_SAND);
+    SEEDS(Material.SEEDS, Material.CROPS, Material.SOIL),
+    POTATO(Material.POTATO_ITEM, Material.POTATO, Material.SOIL),
+    CARROT(Material.CARROT_ITEM, Material.CARROT, Material.SOIL),
+    MELON(Material.MELON_SEEDS, Material.MELON_STEM, Material.SOIL),
+    PUMPKIN(Material.PUMPKIN_SEEDS, Material.PUMPKIN_STEM, Material.SOIL),
+    BEETROOT(Material.BEETROOT_SEEDS, Material.BEETROOT_SEEDS, Material.SOIL),
+    NETHER_WART(Material.NETHER_STALK, Material.NETHER_WARTS, Material.SOUL_SAND);
 
-	final Material seed;
-	final Material plant;
-	final Material soilType;
+    final Material seed;
+    final Material plant;
+    final Material soilType;
 
-	Crop(Material seed, Material plant, Material soilType) {
-		this.seed = seed;
-		this.plant = plant;
-		this.soilType = soilType;
+    Crop(Material seed, Material plant, Material soilType) {
+        this.seed = seed;
+        this.plant = plant;
+        this.soilType = soilType;
 	}
 
 	public Material getSeed() {
