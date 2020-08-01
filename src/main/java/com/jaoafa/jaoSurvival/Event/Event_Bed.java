@@ -35,7 +35,7 @@ public class Event_Bed implements Listener {
                 CREATIVEorSPECTATOR++;
             }
         }
-        int Need = Summer2020er - CREATIVEorSPECTATOR;
+        int Need = (Summer2020er - CREATIVEorSPECTATOR) / 2 + (Summer2020er - CREATIVEorSPECTATOR) % 2;
         int NowSleeping = 1;
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (!p.getWorld().getName().equalsIgnoreCase("Summer2020")) {
@@ -71,7 +71,7 @@ public class Event_Bed implements Listener {
                 }
                 notsleeping.add(p.getName());
             }
-            Bukkit.broadcastMessage(ChatColor.GOLD + "[Summer2020]" + " " + ChatColor.RESET + "寝ていないプレイヤー: " + String.join(",", notsleeping));
+            Bukkit.broadcastMessage(ChatColor.GOLD + "[Summer2020]" + " " + ChatColor.RESET + "寝ていないプレイヤー: " + String.join(", ", notsleeping));
         }
     }
 }
