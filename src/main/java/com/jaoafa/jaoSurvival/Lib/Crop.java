@@ -38,18 +38,27 @@ public enum Crop {
 	 * @param soilType 調べるSoulType
 	 * @return 使えるか
 	 */
-	public static boolean containSoilType(Material soilType){
-		for(Crop crop : values()){
-			if(crop.soilType == soilType){
+	public static boolean containSoilType(Material soilType) {
+		for (Crop crop : values()) {
+			if (crop.soilType == soilType) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static Crop fromSeed(Material seed){
-		for(Crop crop : values()){
-			if(crop.seed == seed){
+	public static Crop fromSeed(Material seed) {
+		for (Crop crop : values()) {
+			if (crop.seed == seed) {
+				return crop;
+			}
+		}
+		return null;
+	}
+
+	public static Crop fromPlant(Material plant) {
+		for (Crop crop : values()) {
+			if (crop.plant == plant) {
 				return crop;
 			}
 		}

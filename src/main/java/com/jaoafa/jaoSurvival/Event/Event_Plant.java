@@ -1,7 +1,6 @@
 package com.jaoafa.jaoSurvival.Event;
 
-import java.util.*;
-
+import com.jaoafa.jaoSurvival.Lib.Crop;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -13,7 +12,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.jaoafa.jaoSurvival.Lib.Crop;
+import java.util.ArrayDeque;
+import java.util.HashSet;
+import java.util.Queue;
+import java.util.Set;
 
 public class Event_Plant implements Listener {
 	@EventHandler
@@ -34,16 +36,16 @@ public class Event_Plant implements Listener {
 
 		Block clickBlock = event.getClickedBlock();
 		Material soilType = clickBlock.getType();
-		if(soilType == null){
+		if (soilType == null) {
 			return;
 		}
-		if(!Crop.containSoilType(soilType)) {
+		if (!Crop.containSoilType(soilType)) {
 			return;
 		}
 
 		Material seedType = is.getType();
 		Crop crop = Crop.fromSeed(seedType);
-		if(crop == null){
+		if (crop == null) {
 			return;
 		}
 
@@ -53,26 +55,26 @@ public class Event_Plant implements Listener {
 		blocks.add(clickBlock);
 		int amount = is.getAmount();
 		int maxRepeat = 64;
-		while(amount > 0 && maxRepeat > 0 && !queue.isEmpty()){
+		while (amount > 0 && maxRepeat > 0 && !queue.isEmpty()) {
 			Block checkBlock = queue.poll();
-			if(checkBlock == null){
+			if (checkBlock == null) {
 				continue;
 			}
-			for(BlockFace face : new BlockFace[]{BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST}){
+			for (BlockFace face : new BlockFace[]{BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST}) {
 				Block relativeBlock = checkBlock.getRelative(face);
-				if(relativeBlock.getType() != soilType){
+				if (relativeBlock.getType() != soilType) {
 					continue;
 				}
-				if(blocks.contains(relativeBlock)) {
+				if (blocks.contains(relativeBlock)) {
 					continue;
 				}
 				if (relativeBlock.getRelative(BlockFace.UP) == null || !relativeBlock.getRelative(BlockFace.UP).isEmpty()) {
 					continue;
 				}
-				if(amount <= 0) {
+				if (amount <= 0) {
 					break;
 				}
-				if(maxRepeat <= 0) {
+				if (maxRepeat <= 0) {
 					break;
 				}
 				blocks.add(relativeBlock);
