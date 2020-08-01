@@ -1,26 +1,20 @@
 package com.jaoafa.jaoSurvival;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Calendar;
-
 import com.jaoafa.jaoSurvival.Event.*;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import com.jaoafa.jaoSurvival.Lib.MySQLDBManager;
 import com.jaoafa.jaoSurvival.Task.Task_CheckVoteCount;
-
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.hooks.AnnotatedEventManager;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 
 public class Main extends JavaPlugin {
 	static Main main;
@@ -92,6 +86,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Event_MCBansLoginCheck(), this);
 		getServer().getPluginManager().registerEvents(new Event_CommandNotify(), this);
 		getServer().getPluginManager().registerEvents(new Event_Plant(), this);
+		getServer().getPluginManager().registerEvents(new Event_Bed(), this);
 		new Task_CheckVoteCount().runTaskTimer(this, 0L, 12000L);
 	}
 
