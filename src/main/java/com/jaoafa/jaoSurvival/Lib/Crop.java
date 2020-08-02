@@ -8,7 +8,7 @@ public enum Crop {
 	CARROT(Material.CARROT_ITEM, Material.CARROT, Material.SOIL),
 	MELON(Material.MELON_SEEDS, Material.MELON_STEM, Material.SOIL),
 	PUMPKIN(Material.PUMPKIN_SEEDS, Material.PUMPKIN_STEM, Material.SOIL),
-	BEETROOT(Material.BEETROOT_SEEDS, Material.BEETROOT, Material.SOIL),
+	BEETROOT(Material.BEETROOT_SEEDS, Material.BEETROOT_BLOCK, Material.SOIL),
 	NETHER_WART(Material.NETHER_STALK, Material.NETHER_WARTS, Material.SOUL_SAND);
 
 	final Material seed;
