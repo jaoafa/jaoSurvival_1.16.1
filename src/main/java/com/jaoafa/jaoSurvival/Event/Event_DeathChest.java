@@ -92,7 +92,6 @@ public class Event_DeathChest implements Listener {
 
         Player chest_player = deathChest.get(clickBlock.getLocation());
         List<ItemStack> item = items.get(chest_player.getUniqueId());
-        Bukkit.broadcastMessage("item size: " + item.size());
 
         Inventory inv = Bukkit.createInventory(chest_player, 9 * 5, chest_player.getName() + "のDeathChest");
         for (ItemStack is : item) {
@@ -143,5 +142,7 @@ public class Event_DeathChest implements Listener {
         Player chest_player = deathChest.get(chest.getLocation());
         items.get(chest_player.getUniqueId()).stream().filter(Objects::nonNull).forEach(item -> chest.getWorld().dropItemNaturally(chest.getLocation(), item));
         Bukkit.broadcastMessage("[DeathChest] " + ChatColor.GREEN + chest_player.getName() + "のDeathChestが" + event.getPlayer().getName() + "によって破壊されました。");
+        event.setCancelled(true);
+        chest.getBlock().setType(Material.AIR);
     }
 }
