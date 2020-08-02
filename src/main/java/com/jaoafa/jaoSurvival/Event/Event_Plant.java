@@ -60,7 +60,16 @@ public class Event_Plant implements Listener {
 			if (checkBlock == null) {
 				continue;
 			}
-			for (BlockFace face : new BlockFace[]{BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST}) {
+			for (BlockFace face : new BlockFace[]{
+					BlockFace.NORTH,
+					BlockFace.EAST,
+					BlockFace.SOUTH,
+					BlockFace.WEST,
+					BlockFace.NORTH_EAST,
+					BlockFace.NORTH_WEST,
+					BlockFace.SOUTH_EAST,
+					BlockFace.SOUTH_WEST,
+			}) {
 				Block relativeBlock = checkBlock.getRelative(face);
 				if (relativeBlock.getType() != soilType) {
 					continue;
