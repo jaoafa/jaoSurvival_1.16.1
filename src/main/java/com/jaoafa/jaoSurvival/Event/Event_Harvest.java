@@ -47,7 +47,7 @@ public class Event_Harvest implements Listener {
         Queue<Block> queue = new ArrayDeque<>();
         queue.add(block);
         blocks.add(block);
-        int maxRepeat = 100;
+        int maxRepeat = 200;
         while (maxRepeat > 0 && !queue.isEmpty()) {
             Block checkBlock = queue.poll();
             if (checkBlock == null) {
