@@ -88,6 +88,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Event_Plant(), this);
 		getServer().getPluginManager().registerEvents(new Event_Bed(), this);
 		getServer().getPluginManager().registerEvents(new Event_Harvest(), this);
+		getServer().getPluginManager().registerEvents(new Event_DeathChest(), this);
 		new Task_CheckVoteCount().runTaskTimerAsynchronously(this, 0L, 12000L);
 	}
 
