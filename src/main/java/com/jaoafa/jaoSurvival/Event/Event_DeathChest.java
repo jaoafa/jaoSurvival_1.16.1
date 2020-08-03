@@ -14,6 +14,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -72,6 +73,19 @@ public class Event_DeathChest implements Listener {
         player.sendMessage("[DeathChest] " + ChatColor.GREEN + "DeathChestを" + loc.getWorld().getName() + " " + loc.getBlockX() + " " + loc.getBlockY() + " " + loc.getBlockZ() + "に生成しました。10分後に自動的に壊れます。");
 
         new Task_DropChest(player, loc).runTaskLater(Main.getJavaPlugin(), 12000L);
+    }
+
+    @EventHandler
+    public void onExplode(EntityExplodeEvent event) {
+        for (Block block : event.blockList()) {
+            if (block.getType() != Material.CHEST) {
+                continue;
+            }
+            if (!deathChest.containsKey(block.getLocation())) {
+                continue;
+            }
+            event.blockList().remove(block);
+        }
     }
 
     @EventHandler

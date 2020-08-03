@@ -39,6 +39,7 @@ public class Task_DropChest extends BukkitRunnable {
                 });
 
         Event_DeathChest.items.remove(player.getUniqueId());
+        Event_DeathChest.deathChest.remove(loc);
         player.sendMessage("[DeathChest] " + ChatColor.GREEN + "あなたのDeathChestが壊れました…。");
     }
 }
