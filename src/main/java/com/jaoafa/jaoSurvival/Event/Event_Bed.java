@@ -54,6 +54,8 @@ public class Event_Bed implements Listener {
         if (NowNeed == 0) {
             Bukkit.broadcastMessage(ChatColor.GOLD + "[Summer2020]" + " " + ChatColor.RESET + "まもなく朝がやってきます…！");
             Bukkit.getWorld("Summer2020").setTime(0L);
+            Bukkit.getWorld("Summer2020").setStorm(false);
+            Bukkit.getWorld("Summer2020").setThundering(false);
         } else {
             Set<String> notsleeping = new HashSet<>();
             for (Player p : Bukkit.getOnlinePlayers()) {
