@@ -2,18 +2,15 @@ package com.jaoafa.jaoSurvival.Event;
 
 import com.jaoafa.jaoSurvival.Lib.Crop;
 import org.bukkit.ChatColor;
-import org.bukkit.CropState;
 import org.bukkit.Material;
-import org.bukkit.NetherWartsState;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.Ageable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.Crops;
-import org.bukkit.material.NetherWarts;
 
 import java.util.*;
 
@@ -25,13 +22,10 @@ public class Event_Harvest implements Listener {
             return;
         }
         ItemStack is = player.getInventory().getItemInMainHand();
-        if (is == null) {
-            return;
-        }
-        if (is.getType() != Material.WOOD_HOE
+        if (is.getType() != Material.WOODEN_HOE
                 && is.getType() != Material.STONE_HOE
                 && is.getType() != Material.IRON_HOE
-                && is.getType() != Material.GOLD_HOE
+                && is.getType() != Material.GOLDEN_HOE
                 && is.getType() != Material.DIAMOND_HOE) {
             return;
         }
@@ -86,17 +80,13 @@ public class Event_Harvest implements Listener {
             if (is.getType() == Material.AIR) {
                 break;
             }
-            if (b.getState().getData() instanceof Crops) {
-                Crops c = (Crops) b.getState().getData();
-                if (c.getState() != CropState.RIPE) {
-                    continue;
-                }
+
+            if (!(b.getState().getBlockData() instanceof Ageable)) {
+                continue;
             }
-            if (b.getState().getData() instanceof NetherWarts) {
-                NetherWarts n = (NetherWarts) b.getState().getData();
-                if (n.getState() != NetherWartsState.RIPE) {
-                    continue;
-                }
+            Ageable age = (Ageable) b.getState().getBlockData();
+            if (age.getAge() < age.getMaximumAge()) {
+                continue;
             }
             if (!b.breakNaturally(is)) {
                 Collection<ItemStack> drops = b.getDrops(is);

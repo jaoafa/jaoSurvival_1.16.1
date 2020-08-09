@@ -48,6 +48,7 @@ public class Event_DeathChest implements Listener {
 
         opening.entrySet().stream()
                 .filter(a -> a.getValue().equals(player.getUniqueId()))
+                .filter(a -> a.getKey() != null)
                 .filter(a -> Bukkit.getPlayer(a.getKey()) != null)
                 .forEach(a -> {
                     Bukkit.getPlayer(a.getKey()).closeInventory();
@@ -59,7 +60,7 @@ public class Event_DeathChest implements Listener {
         }
 
         loc = loc.getBlock().getLocation();
-        while (loc.getBlock().getType() != Material.WATER && loc.getBlock().getType() != Material.STATIONARY_WATER && loc.getBlock().getType() != Material.LAVA && loc.getBlock().getType() != Material.AIR) {
+        while (loc.getBlock().getType() != Material.WATER && loc.getBlock().getType() != Material.LAVA && loc.getBlock().getType() != Material.AIR) {
             loc = loc.add(0, 1, 0);
         }
         loc.getBlock().setType(Material.CHEST);
@@ -97,6 +98,10 @@ public class Event_DeathChest implements Listener {
         Player player = event.getPlayer();
         Block clickBlock = event.getClickedBlock();
 
+        if (clickBlock == null) {
+            return;
+        }
+
         if (clickBlock.getType() != Material.CHEST) {
             return;
         }
@@ -120,7 +125,7 @@ public class Event_DeathChest implements Listener {
 
     @EventHandler
     public void onCloseDeathChest(InventoryCloseEvent event) {
-        if (!event.getInventory().getTitle().endsWith("のDeathChest")) {
+        if (!event.getView().getTitle().endsWith("のDeathChest")) {
             return;
         }
         if (!(event.getPlayer() instanceof Player)) {
@@ -131,7 +136,7 @@ public class Event_DeathChest implements Listener {
         UUID chest_uuid = opening.get(player.getUniqueId());
         List<Map.Entry<Location, Player>> matches = deathChest.entrySet().stream().filter(a -> a.getValue().getUniqueId().equals(chest_uuid)).collect(Collectors.toList());
         Location loc = matches.get(0).getKey();
-        if (Arrays.stream(inv.getContents()).noneMatch(item -> item != null && item.getType() != Material.AIR)) {
+        if (Arrays.stream(inv.getContents()).noneMatch(item -> item.getType() != Material.AIR)) {
             loc.getBlock().setType(Material.AIR);
             opening.remove(player.getUniqueId());
             deathChest.remove(loc);

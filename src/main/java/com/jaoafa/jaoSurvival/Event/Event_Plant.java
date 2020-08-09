@@ -32,10 +32,10 @@ public class Event_Plant implements Listener {
         ItemStack is = event.getItem();
 
         Block clickBlock = event.getClickedBlock();
-        Material soilType = clickBlock.getType();
-        if (soilType == null) {
+        if (clickBlock == null) {
             return;
         }
+        Material soilType = clickBlock.getType();
         if (!Crop.containSoilType(soilType)) {
             return;
         }
@@ -79,7 +79,8 @@ public class Event_Plant implements Listener {
                 if (blocks.contains(relativeBlock)) {
                     continue;
                 }
-                if (relativeBlock.getRelative(BlockFace.UP) == null || !relativeBlock.getRelative(BlockFace.UP).isEmpty()) {
+                relativeBlock.getRelative(BlockFace.UP);
+                if (!relativeBlock.getRelative(BlockFace.UP).isEmpty()) {
                     continue;
                 }
                 if (amount <= 0) {
@@ -103,9 +104,25 @@ public class Event_Plant implements Listener {
                 break;
             }
             ItemStack useIs = player.getInventory().getItem(slotList.get(0));
+            if (useIs == null) {
+                slotList.remove(0);
+                if (slotList.isEmpty()) {
+                    break;
+                }
+                useIs = player.getInventory().getItem(slotList.get(0));
+            }
+            if (useIs == null) {
+                continue;
+            }
             if (useIs.getAmount() <= 0) {
                 slotList.remove(0);
+                if (slotList.isEmpty()) {
+                    break;
+                }
                 useIs = player.getInventory().getItem(slotList.get(0));
+            }
+            if (useIs == null) {
+                continue;
             }
             Block plantBlock = block.getRelative(BlockFace.UP);
             if (crop.getSoilType() != block.getType()) {
