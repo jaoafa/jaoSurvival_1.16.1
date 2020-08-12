@@ -136,7 +136,7 @@ public class Event_DeathChest implements Listener {
         UUID chest_uuid = opening.get(player.getUniqueId());
         List<Map.Entry<Location, Player>> matches = deathChest.entrySet().stream().filter(a -> a.getValue().getUniqueId().equals(chest_uuid)).collect(Collectors.toList());
         Location loc = matches.get(0).getKey();
-        if (Arrays.stream(inv.getContents()).noneMatch(item -> item.getType() != Material.AIR)) {
+        if (Arrays.stream(inv.getContents()).noneMatch(item -> item != null && item.getType() != Material.AIR)) {
             loc.getBlock().setType(Material.AIR);
             opening.remove(player.getUniqueId());
             deathChest.remove(loc);
